@@ -1,0 +1,42 @@
+<head>
+  <title>iron-router-bug</title>
+</head>
+
+<body>
+</body>
+
+<template name="page">
+	{{> yield}}
+</template>
+
+<template name="index">
+	<h1>index (/)</h1>
+	{{> common}}
+</template>
+
+<template name="other">
+	<h1>other</h1>
+	{{> common}}
+</template>
+
+<template name="common">
+
+	<h2>Links</h2>
+	<ul>
+		<li><a href="{{pathFor route='/'}}">index (/)</a></li>
+		<li><a href="{{pathFor route='other'}}">other</a></li>
+	</ul>
+
+	<h2>Bugs</h2>
+	<ol>
+		<li>Iron router doesn't correctly create a named route for paths EQUAL-TO "/". This error appears in the console: <pre>pathFor couldn't find a route named "/"</pre></li>
+	</ol>
+
+	<h2>Symptoms</h2>
+	<ol>
+		<li>The index link is relative instead of absolute - have a look at the link when on the "/" page compared to when on the "other" page.
+		</li>
+		<li>The onBeforeAction action does not trigger for "/" if you don't give the route a name when defining it with Router.route()</li>
+	</ol>
+
+</template>
